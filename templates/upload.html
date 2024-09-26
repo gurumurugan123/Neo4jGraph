@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function clearTable() {
+            const table = document.getElementById('candidateTable');
+            // Clear all rows except the header
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+            table.style.display = 'none'; // Hides the table after clearing it
+            document.getElementById('noDataMessage').style.display = 'block'; // Show the "No data" message
+        }
+
+        function searchCandidates() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('candidateTable');
+            const rows = table.getElementsByTagName('tr');
+
+            // Loop through all table rows and hide those that don't match the search query
+            for (let i = 1; i < rows.length; i++) { // Start at 1 to skip the header row
+                const cells = rows[i].getElementsByTagName('td');
+                const nameCell = cells[0]; // Assuming the first column is the name
+                const skillsCell = cells[5]; // Assuming the sixth column is the skills
+
+                if (nameCell && skillsCell) {
+                    const nameValue = nameCell.textContent || nameCell.innerText;
+                    const skillsValue = skillsCell.textContent || skillsCell.innerText;
+
+                    // Check if the search term is found in the name or skills
+                    if (nameValue.toLowerCase().indexOf(filter) > -1 || skillsValue.toLowerCase().indexOf(filter) > -1) {
+                        rows[i].style.display = ''; // Show the row
+                    } else {
+                        rows[i].style.display = 'none'; // Hide the row
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Upload Candidate Data</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <input type="submit" value="Upload">
+    </form>
+
+    {% if candidates %}
+    <h2>Candidate Data</h2>
+    <input type="text" id="searchInput" onkeyup="searchCandidates()" placeholder="Search for names or skills..." /> <!-- Search input -->
+    <button onclick="clearTable()">Delete All Data</button> <!-- Delete button -->
+    <table border="1" id="candidateTable">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>College</th>
+            <th>Degree</th>
+            <th>Year of Passout</th>
+            <th>Skills</th> <!-- Added Skills column -->
+        </tr>
+        {% for candidate in candidates %}
+        <tr>
+            <td>{{ candidate.name }}</td>
+            <td>{{ candidate.email }}</td>
+            <td>{{ candidate.college }}</td>
+            <td>{{ candidate.degree }}</td>
+            <td>{{ candidate.year_of_passout }}</td>
+            <td>{{ candidate.skills | join(", ") }}</td> <!-- Display skills as a comma-separated list -->
+        </tr>
+        {% endfor %}
+    </table>
+    <p id="noDataMessage" style="display: none;">No candidate data uploaded yet.</p> <!-- Hidden message -->
+    {% else %}
+    <p>No candidate data uploaded yet.</p>
+    {% endif %}
+</body>
+</html>
