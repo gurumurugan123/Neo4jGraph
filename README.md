@@ -1,4 +1,7 @@
 Simon Game
+
+
+
 Overview
 Simon Game is a fun and interactive memory game where players repeat an increasingly long sequence of colors and sounds to progress to higher levels.
 
