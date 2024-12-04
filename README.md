@@ -1,4 +1,47 @@
-# Flask Neo4j Candidate Data Uploader
+#Simon Game 🎵
+
+
+Overview
+Simon Game is a memory-based game that challenges players to repeat an ever-growing sequence of lights and sounds. The goal is to test and improve memory skills while having fun!
+
+Features
+Interactive Gameplay: Watch the sequence of lights and sounds and repeat them in the correct order.
+Increasing Difficulty: The sequence grows longer with each level.
+Audio Feedback: Enjoy distinct tones for each color.
+Responsive Design: Play seamlessly on both desktop and mobile devices.
+Technologies Used
+HTML: For the game’s structure.
+CSS: For styling the interface.
+JavaScript: To handle game logic and interactions.
+How to Play
+Start the game by pressing any key or a dedicated Start button.
+Observe the sequence of colors and sounds.
+Repeat the sequence by clicking on the corresponding buttons in the correct order.
+Advance to the next level if the sequence is correct; the game ends if you make a mistake.
+Project Structure
+bash
+Copy code
+simon-game/  
+│  
+├── index.html       # HTML structure  
+├── style.css        # Styling for the game  
+├── game.js          # Game logic and interactivity  
+└── README.md        # Project documentation  
+How to Run Locally
+Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/your-username/simon-game.git  
+cd simon-game  
+Open the index.html file in your preferred web browser.
+
+Play the game and enjoy!
+
+Future Enhancements
+Add a high-score tracker to save the best performance.
+Introduce custom themes for colors and sounds.
+Include multiplayer mode for competitive play.
 
 ## Overview
 This project is a web application built using Flask and Neo4j. The application allows users to upload CSV files containing candidate information, which is then stored in a Neo4j graph database. The web interface displays the candidate data and provides functionalities such as searching for candidates by name or skills, and clearing the displayed data.
